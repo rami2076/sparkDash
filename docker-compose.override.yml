@@ -1,8 +1,14 @@
 # Local override (fork) — keeps upstream docker-compose.yml untouched.
-# This cluster authenticates to remote units with the shared key created by
-# discover-sparks (id_ed25519_shared), mounted under the default key name that
-# OpenSSH inside the container expects.
 services:
   sparkdash:
     volumes:
+      # This cluster authenticates to remote units with the shared key created by
+      # discover-sparks (id_ed25519_shared), mounted under the default key name
+      # OpenSSH inside the container expects.
       - ${HOME}/.ssh/id_ed25519_shared:/root/.ssh/id_ed25519:ro
+      # settings.json lives in the docs repo (single source of truth) and is
+      # bind-mounted as a *directory*: the server saves it atomically
+      # (temp file + rename), which a single-file bind mount cannot support.
+      - ${HOME}/Documents/works/docs/scripts/sparkdash:/docs
+    environment:
+      - SETTINGS_JSON_PATH=/docs/settings.json
