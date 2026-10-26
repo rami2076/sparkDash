@@ -21,7 +21,7 @@ import type { AuthMode, SparkSnapshot } from "../../api/types";
 import { isWorkerSpark } from "../../api/sparkRole";
 import { ACTIVITY_ID, COST_ID, ENERGY_ID, OVERVIEW_ID, SHOWCASE_ID, TEMPS_ID, TOKENS_ID, benchId, idToPath } from "../../constants";
 import { BENCH_TYPES } from "../bench/benchCatalog";
-import { BoltIcon, ChevronDownIcon, CoinsIcon, GearIcon, GithubIcon, GlobeIcon, GridIcon, ListIcon, PanelLeftIcon, PlusIcon, SearchIcon, TerminalIcon, ThermometerIcon, TokensIcon, XLogoIcon } from "../ui/icons";
+import { BoltIcon, ChevronDownIcon, CoinsIcon, GearIcon, GithubIcon, GlobeIcon, GridIcon, ListIcon, PanelLeftIcon, PlusIcon, SearchIcon, ServerIcon, TerminalIcon, ThermometerIcon, TokensIcon, XLogoIcon } from "../ui/icons";
 import { OpenAccessChip } from "../OpenAccessChip";
 import { ThemeSwitch } from "../ThemeSwitch";
 import { isThrottling, railSubLabel } from "./sparkSummary";
@@ -413,6 +413,17 @@ export function AppSidebar({
       <div className="rail-foot">
         <div className="rail-settings">
           <nav className="rail-list">
+            {/* Local fork addition: cross-link to Model Hub on the same host (:8000). */}
+            <a
+              href={`http://${window.location.hostname}:8000/`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rail-item"
+              title="Model Hub (LLM / FLUX)"
+            >
+              <ServerIcon className="h-4 w-4" />
+              <span className="rail-item__name">Model Hub</span>
+            </a>
             <button type="button" className="rail-item" onClick={onOpenSettings}>
               <GearIcon className="h-4 w-4" />
               <span className="rail-item__name">Settings</span>
