@@ -1,0 +1,8 @@
+# Local override (fork) — keeps upstream docker-compose.yml untouched.
+# This cluster authenticates to remote units with the shared key created by
+# discover-sparks (id_ed25519_shared), mounted under the default key name that
+# OpenSSH inside the container expects.
+services:
+  sparkdash:
+    volumes:
+      - ${HOME}/.ssh/id_ed25519_shared:/root/.ssh/id_ed25519:ro
